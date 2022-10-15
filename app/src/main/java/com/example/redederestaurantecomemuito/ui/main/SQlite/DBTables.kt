@@ -2,37 +2,21 @@ package com.example.redederestaurantecomemuito.ui.main.SQlite
 
 object DBTables {
 
-//    const val TABLE_ANUNCIOS = "CREATE TABLE Anuncios (\n" +
-//            "    id_anuncio      INT     NOT NULL,\n" +
-//            "    meio_divulgação VARCHAR,\n" +
-//            "    valor           DOUBLE,\n" +
-//            "    data_inicio     DATE,\n" +
-//            "    data_final      DATE,\n" +
-//            "    id_restaurante  INT     NOT NULL,\n" +
-//            "    CONSTRAINT PK_Anuncios PRIMARY KEY (\n" +
-//            "        id_anuncio\n" +
-//            "    ),\n" +
-//            "    CONSTRAINT FK_Anunc_Restaurante FOREIGN KEY (\n" +
-//            "        id_restaurante\n" +
-//            "    )\n" +
-//            "    REFERENCES Restaurante (id_restaurante) ON DELETE CASCADE\n" +
-//            ");\n"
-
-    const val TABLE_ANUNCIOS = "CREATE TABLE Anuncios (" +
-            "    id_anuncio      INT     NOT NULL," +
-            "    meio_divulgação VARCHAR," +
-            "    valor           DOUBLE," +
-            "    data_inicio     DATE," +
-            "    data_final      DATE," +
-            "    id_restaurante  INT     NOT NULL," +
-            "    CONSTRAINT PK_Anuncios PRIMARY KEY (" +
-            "        id_anuncio" +
-            "    )," +
-            "    CONSTRAINT FK_Anunc_Restaurante FOREIGN KEY (" +
-            "        id_restaurante" +
-            "    )" +
-            "    REFERENCES Restaurante (id_restaurante) ON DELETE CASCADE" +
-            ")"
+    const val TABLE_ANUNCIOS = "CREATE TABLE Anuncios (\n" +
+            "    id_anuncio      INT     NOT NULL,\n" +
+            "    meio_divulgação VARCHAR,\n" +
+            "    valor           DOUBLE,\n" +
+            "    data_inicio     VARCHAR,\n" +
+            "    data_final      VARCHAR,\n" +
+            "    id_restaurante  INT     NOT NULL,\n" +
+            "    CONSTRAINT PK_Anuncios PRIMARY KEY (\n" +
+            "        id_anuncio\n" +
+            "    ),\n" +
+            "    CONSTRAINT FK_Anunc_Restaurante FOREIGN KEY (\n" +
+            "        id_restaurante\n" +
+            "    )\n" +
+            "    REFERENCES Restaurante (id_restaurante) ON DELETE CASCADE\n" +
+            ");\n"
 
     const val TABLE_AREAS_CONSTRUCAO = "CREATE TABLE Areas_Construcao (\n" +
             "    id_restaurante INT     NOT NULL,\n" +
@@ -40,7 +24,7 @@ object DBTables {
             "    tamanho        VARCHAR,\n" +
             "    custo          DOUBLE,\n" +
             "    id_area        INT     NOT NULL,\n" +
-            "    data_termino   DATE,\n" +
+            "    data_termino   VARCHAR,\n" +
             "    CONSTRAINT PK_Areas_Construcao PRIMARY KEY (\n" +
             "        id_restaurante,\n" +
             "        id_area\n" +
@@ -120,6 +104,7 @@ object DBTables {
             "    )\n" +
             ");\n"
 
+
     const val TABLE_FAZ_CONTATO = "CREATE TABLE Faz_Contato (\n" +
             "    id_atendente INT NOT NULL,\n" +
             "    id_cliente   INT NOT NULL,\n" +
@@ -135,7 +120,7 @@ object DBTables {
             "        id_cliente\n" +
             "    )\n" +
             "    REFERENCES Cliente (id_cliente) ON DELETE NO ACTION\n" +
-            ");\n"
+            ");"
 
     const val TABLE_FUNCIONARIOS = "CREATE TABLE Funcionarios (\n" +
             "    id_funcionario INT     NOT NULL,\n" +
@@ -144,8 +129,8 @@ object DBTables {
             "    endereco       VARCHAR,\n" +
             "    salario        DOUBLE,\n" +
             "    id_restaurante INT     NOT NULL,\n" +
-            "    data_adm       DATE,\n" +
-            "    data_saida     DATE,\n" +
+            "    data_adm       VARCHAR,\n" +
+            "    data_saida     VARCHAR,\n" +
             "    CONSTRAINT PK_Funcionarios PRIMARY KEY (\n" +
             "        id_funcionario\n" +
             "    ),\n" +
@@ -185,7 +170,7 @@ object DBTables {
             "    CONSTRAINT FK_Mesa_Recep FOREIGN KEY (\n" +
             "        id_recepcionista\n" +
             "    )\n" +
-            "    REFERENCES Rescepcionista (id_funcionario) ON DELETE NO ACTION\n" +
+            "    REFERENCES Recepcionista (id_funcionario) ON DELETE NO ACTION\n" +
             ");\n"
 
     const val TABLE_POSSUI_RESERVA_MESA = "CREATE TABLE Possui_Reserv_Mesa (\n" +
@@ -193,8 +178,8 @@ object DBTables {
             "    id_restaurante   INT     NOT NULL,\n" +
             "    num_mesa         INT     NOT NULL,\n" +
             "    valor_da_reserva DOUBLE,\n" +
-            "    data_reserva     DATE,\n" +
-            "    hora_reserva     TIME,\n" +
+            "    data_reserva     VARCHAR,\n" +
+            "    hora_reserva     VARCHAR,\n" +
             "    forma_pagamento  VARCHAR,\n" +
             "    CONSTRAINT PK_Possui_Reserv_Mesa PRIMARY KEY (\n" +
             "        id_reserva,\n" +
@@ -239,7 +224,7 @@ object DBTables {
             "    CONSTRAINT FK_Cont_Cliente FOREIGN KEY (\n" +
             "        id_cliente\n" +
             "    )\n" +
-            "    REFERENCES Clientes (id_cliente) ON DELETE NO ACTION\n" +
+            "    REFERENCES Cliente (id_cliente) ON DELETE NO ACTION\n" +
             ");\n"
 
     const val TABLE_RESTAURANTE = "CREATE TABLE Restaurante (\n" +
@@ -279,5 +264,76 @@ object DBTables {
             "        id_funcionario\n" +
             "    )\n" +
             "    REFERENCES Funcionarios (id_funcionario) ON DELETE CASCADE\n" +
-            ");"
+            ");\n"
+
+    const val TABLE_ALIMENTOS = "CREATE TABLE Alimentos (\n" +
+            "    id_empresa_alimenticia   INT     NOT NULL,\n" +
+            "    certificado_qualificacao VARCHAR,\n" +
+            "    CONSTRAINT PK_Alimentos PRIMARY KEY (\n" +
+            "        id_empresa_alimenticia\n" +
+            "    ),\n" +
+            "    CONSTRAINT FK_Alimentos_Emp_Parc FOREIGN KEY (\n" +
+            "        id_empresa_alimenticia\n" +
+            "    )\n" +
+            "    REFERENCES Empresa_alimenticia (id_empresa_alimenticia) ON DELETE CASCADE\n" +
+            ");\n"
+
+
+    const val INSERT_ANUNCIOS =
+        "INSERT INTO Anuncios (id_anuncio, meio_divulgação, valor, data_inicio, data_final, id_restaurante) VALUES (500, 'Outdoor', 2000.0, '2018-02-20', '2018-04-02', 1000);\n" +
+                "INSERT INTO Anuncios (id_anuncio, meio_divulgação, valor, data_inicio, data_final, id_restaurante) VALUES (590, 'Cartaz', 1800.0, '2018-01-10', '2018-04-22', 1001);\n" +
+                "INSERT INTO Anuncios (id_anuncio, meio_divulgação, valor, data_inicio, data_final, id_restaurante) VALUES (600, 'Cartaz', 1800.0, '2019-01-10', '2019-04-22', 1002);"
+
+    const val INSERT_AREA_CONSTRUCAO =
+        "INSERT INTO Areas_Construcao (id_restaurante, endereco, tamanho, custo, id_area, data_termino) VALUES (1000, 'Av Bandeira numero 40', '4000 metros quadrados', 10000.0, '2018-05-15', '2019-04-10');\n" +
+                "INSERT INTO Areas_Construcao (id_restaurante, endereco, tamanho, custo, id_area, data_termino) VALUES (1001, 'Av Borges 400', '5000 metros quadrados', 8000.0, '2019-05-15', '2020-04-10');\n" +
+                "INSERT INTO Areas_Construcao (id_restaurante, endereco, tamanho, custo, id_area, data_termino) VALUES (1002, 'Av Torres 55', '7500 metros quadrados', 1500.0, '2019-01-15', '2020-12-10');\n"
+
+    const val INSERT_ATENDENTE =
+        "INSERT INTO Atendente (id_funcionario, credencial) VALUES (3006, 'Codigo FG550');\n" +
+                "INSERT INTO Atendente (id_funcionario, credencial) VALUES (3007, 'Codigo JM650');\n"
+
+    const val INSERT_CLIENTE =
+        "INSERT INTO Cliente (id_cliente, nome, cpf) VALUES (300, 'Geraldo', '129213321-21');\n" +
+                "INSERT INTO Cliente (id_cliente, nome, cpf) VALUES (308, 'Alex', '999993321-21');\n" +
+                "INSERT INTO Cliente (id_cliente, nome, cpf) VALUES (309, 'Tiago', '187593321-21');"
+
+    const val INSERT_FUNCIONARIO =
+        "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3117, 'Jose', '(44)5554-2990', 'Rua Delta, numero 35', 9500.0, 1001, '2019-02-20', '2021-\n" +
+                "10-09');\n" +
+
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3001, 'Abreu', '(44)8624-2233', 'Rua Tenda, numero 14', 1500.0, 1001, '2018-02-\n" +
+                "20', '2022-04-10');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3002, 'Alfi', '(44)5624-2233', 'Rua Quatro, numero 15', 1600.0, 1002, '2018-02-20', '2022-\n" +
+                "10-02');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3003, 'Algusto', '(44)8884-2233', 'Rua Zem, numero 590', 1000.0, 1000, '2019-02-\n" +
+                "20', '2021-02-20');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3004, 'Celio', '(44)7774-2233', 'Rua Tenda, numero 348', 1500.0, 1001, '2019-02-\n" +
+                "20', '2021-04-10');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3005, 'Dexter', '(44)5554-2233', 'Rua Quatro, numero 344', 1600.0, 1002, '2019-02-\n" +
+                "20', '2021-02-10');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3006, 'Claudia', '(44)5554-2553', 'Rua Dois, numero 94', 1600.0, 1002, '2019-02-\n" +
+                "20', '2021-02-10');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3007, 'Julia', '(44)5554-2803', 'Rua Dois, numero 125', 1600.0, 1001, '2019-02-\n" +
+                "20', '2021-10-09');\n" +
+                "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3118, 'Jonathan', '(44)5554-2990', 'Rua 5 de abril, numero 25', 9500.0, 1002, '2019-02-\n" +
+                "20', '2021-10-09');"
+
+    const val INSERT_FUNCIONARIO_2 ="INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) VALUES (3000, 'Bruno', '(44)9424-2233', 'Rua Zem, numero 12', 1000.0, 1000, '2018-02-20', '2022-02-20');\n"
+
+    const val INSERT_MESA =
+        "INSERT INTO Mesa (id_restaurante, num_mesa, status, tipo_mesa, id_recepcionista) VALUES (1001, 7000, 'Disponivel', 'Comum', 3001);\n" +
+                "INSERT INTO Mesa (id_restaurante, num_mesa, status, tipo_mesa, id_recepcionista) VALUES (1000, 6000, 'Disponivel', 'Vip', 3000);\n" +
+                "INSERT INTO Mesa (id_restaurante, num_mesa, status, tipo_mesa, id_recepcionista) VALUES (1002, 8000, 'Disponivel', 'Vip', 3000);\n" +
+                "INSERT INTO Mesa (id_restaurante, num_mesa, status, tipo_mesa, id_recepcionista) VALUES (1002, 9000, 'Disponivel', 'Comum', 3000);"
+
+    const val INSERT_RESERVA =
+        "INSERT INTO Reserva (id_reserva, id_cliente, id_atendente, valor_total_reserva) VALUES (29, 300, 3006, 150.0);\n" +
+                "INSERT INTO Reserva (id_reserva, id_cliente, id_atendente, valor_total_reserva) VALUES (34, 308, 3007, 200.0);\n" +
+                "INSERT INTO Reserva (id_reserva, id_cliente, id_atendente, valor_total_reserva) VALUES (40, 309, 3007, 90.0);"
+
+    const val INSERT_RESTAURANTE =
+        "INSERT INTO Restaurante (id_restaurante, endereco, qtd_mesa_total, qtd_mesa_disponivel) VALUES (1000, 'Rua Alfa, numero 24', 80, 75);\n" +
+                "INSERT INTO Restaurante (id_restaurante, endereco, qtd_mesa_total, qtd_mesa_disponivel) VALUES (1002, 'Rua Mendes, numero 10', 40, 37);\n" +
+                "INSERT INTO Restaurante (id_restaurante, endereco, qtd_mesa_total, qtd_mesa_disponivel) VALUES (1001, 'Rua Vitorino, numero 40', 30, 27);"
 }

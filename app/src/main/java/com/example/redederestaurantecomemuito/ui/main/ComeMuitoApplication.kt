@@ -6,11 +6,10 @@ import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
 
 class ComeMuitoApplication : Application() {
 
-    private lateinit var dbSqlite: DBHelper
+    private var dbSqlite: DBHelper? = null
+
     override fun onCreate() {
         super.onCreate()
-        dbSqlite = DBHelper(this)
+//        dbSqlite = DBHelper(this)
     }
-
-
 }

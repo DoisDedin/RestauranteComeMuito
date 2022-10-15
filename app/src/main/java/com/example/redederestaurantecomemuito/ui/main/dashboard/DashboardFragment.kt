@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.redederestaurantecomemuito.databinding.FragmentDashboardBinding
+import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.models.FuncionarioModel
 
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var dbSqlite: DBHelper? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,19 +23,42 @@ class DashboardFragment : Fragment() {
     ): View {
         val dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
-
+        dbSqlite = DBHelper(requireContext())
+        dbSqlite?.writableDatabase
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        setListeners()
         return root
+    }
+
+    private fun setListeners() {
+        binding.apply {
+            buttonSalvar.setOnClickListener {
+                addFuncionarioInBD(
+                    FuncionarioModel(
+                        nome = edittextNome.text.toString().orEmpty(),
+                        telefone = edittextTelefone.text.toString().orEmpty(),
+                        endereco = edittextEndereco.text.toString().orEmpty(),
+                        salario = edittextSalario.text.toString().toDouble() ?: 0.0,
+                        idRestaurante = edittextIdRestaurante.text.toString().toInt() ?: 1,
+                        dataAdm = edittextDataAdm.text.toString(),
+                        dataSaida = edittextDataSaida.text.toString()
+                    )
+                )
+            }
+        }
+    }
+
+
+    fun addFuncionarioInBD(funcionarioModel: FuncionarioModel) {
+        dbSqlite = DBHelper(requireContext())
+        dbSqlite?.insertFuncionariosInDb(funcionarioModel)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
