@@ -25,7 +25,6 @@ class DashboardFragment : Fragment() {
         val dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
         dbSqlite = DBHelper(requireContext())
-        dbSqlite?.writableDatabase
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setListeners()
@@ -48,13 +47,32 @@ class DashboardFragment : Fragment() {
                     )
                 )
             }
+
+            buttonEditar.setOnClickListener {
+                editarFuncionarioInBD(
+                    FuncionarioModel(
+                        idFuncionario = edittextIdFuncionario.text.toString().toInt()
+                            ?: Calendar.getInstance().timeInMillis.toInt(),
+                        nome = edittextNome.text.toString().orEmpty(),
+                        telefone = edittextTelefone.text.toString().orEmpty(),
+                        endereco = edittextEndereco.text.toString().orEmpty(),
+                        salario = edittextSalario.text.toString().toDouble() ?: 0.0,
+                        idRestaurante = edittextIdRestaurante.text.toString().toInt() ?: 1,
+                        dataAdm = edittextDataAdm.text.toString(),
+                        dataSaida = edittextDataSaida.text.toString()
+                    )
+                )
+            }
         }
     }
 
 
     fun addFuncionarioInBD(funcionarioModel: FuncionarioModel) {
-        dbSqlite = DBHelper(requireContext())
         dbSqlite?.insertFuncionariosInDb(funcionarioModel)
+    }
+
+    fun editarFuncionarioInBD(funcionarioModel: FuncionarioModel) {
+        dbSqlite?.editFuncionarioInDb(funcionarioModel = funcionarioModel)
     }
 
     override fun onDestroyView() {

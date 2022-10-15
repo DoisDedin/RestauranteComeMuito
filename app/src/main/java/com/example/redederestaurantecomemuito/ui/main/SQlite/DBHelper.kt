@@ -73,17 +73,6 @@ class DBHelper(context: Context) :
 
     fun insertFuncionariosInDb(funcionarioModel: FuncionarioModel) {
         val db = this.writableDatabase
-//        val contentValues = ContentValues()
-//        contentValues.put("nome", funcionarioModel.nome)
-//        contentValues.put("telefone", funcionarioModel.telefone)
-//        contentValues.put("endereco", funcionarioModel.endereco)
-//        contentValues.put("salario", funcionarioModel.salario)
-//        contentValues.put("id_restaurante", funcionarioModel.idRestaurante)
-//        contentValues.put("data_adm", funcionarioModel.dataAdm)
-//        contentValues.put("data_saida", funcionarioModel.dataSaida)
-//        val result = db.insert(TABLE_FUNCIONARIOS, null, contentValues)
-//        db.close()
-
         val result = db.execSQL(
             "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) " +
                     "VALUES (${funcionarioModel.idFuncionario}," +
@@ -95,6 +84,13 @@ class DBHelper(context: Context) :
                     " '${funcionarioModel.dataAdm}'," +
                     " '${funcionarioModel.dataSaida}');"
         )
+        db.close()
+    }
+
+    fun editFuncionarioInDb(funcionarioModel: FuncionarioModel) {
+        val db = this.writableDatabase
+        val result = db.execSQL("")
+        db.close()
     }
 
     private fun createAllTables(db: SQLiteDatabase?) {
