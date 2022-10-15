@@ -2,21 +2,37 @@ package com.example.redederestaurantecomemuito.ui.main.SQlite
 
 object DBTables {
 
-    const val TABLE_ANUNCIOS = "CREATE TABLE Anuncios (\n" +
-            "    id_anuncio      INT     NOT NULL,\n" +
-            "    meio_divulgação VARCHAR,\n" +
-            "    valor           DOUBLE,\n" +
-            "    data_inicio     DATE,\n" +
-            "    data_final      DATE,\n" +
-            "    id_restaurante  INT     NOT NULL,\n" +
-            "    CONSTRAINT PK_Anuncios PRIMARY KEY (\n" +
-            "        id_anuncio\n" +
-            "    ),\n" +
-            "    CONSTRAINT FK_Anunc_Restaurante FOREIGN KEY (\n" +
-            "        id_restaurante\n" +
-            "    )\n" +
-            "    REFERENCES Restaurante (id_restaurante) ON DELETE CASCADE\n" +
-            ");\n"
+//    const val TABLE_ANUNCIOS = "CREATE TABLE Anuncios (\n" +
+//            "    id_anuncio      INT     NOT NULL,\n" +
+//            "    meio_divulgação VARCHAR,\n" +
+//            "    valor           DOUBLE,\n" +
+//            "    data_inicio     DATE,\n" +
+//            "    data_final      DATE,\n" +
+//            "    id_restaurante  INT     NOT NULL,\n" +
+//            "    CONSTRAINT PK_Anuncios PRIMARY KEY (\n" +
+//            "        id_anuncio\n" +
+//            "    ),\n" +
+//            "    CONSTRAINT FK_Anunc_Restaurante FOREIGN KEY (\n" +
+//            "        id_restaurante\n" +
+//            "    )\n" +
+//            "    REFERENCES Restaurante (id_restaurante) ON DELETE CASCADE\n" +
+//            ");\n"
+
+    const val TABLE_ANUNCIOS = "CREATE TABLE Anuncios (" +
+            "    id_anuncio      INT     NOT NULL," +
+            "    meio_divulgação VARCHAR," +
+            "    valor           DOUBLE," +
+            "    data_inicio     DATE," +
+            "    data_final      DATE," +
+            "    id_restaurante  INT     NOT NULL," +
+            "    CONSTRAINT PK_Anuncios PRIMARY KEY (" +
+            "        id_anuncio" +
+            "    )," +
+            "    CONSTRAINT FK_Anunc_Restaurante FOREIGN KEY (" +
+            "        id_restaurante" +
+            "    )" +
+            "    REFERENCES Restaurante (id_restaurante) ON DELETE CASCADE" +
+            ")"
 
     const val TABLE_AREAS_CONSTRUCAO = "CREATE TABLE Areas_Construcao (\n" +
             "    id_restaurante INT     NOT NULL,\n" +

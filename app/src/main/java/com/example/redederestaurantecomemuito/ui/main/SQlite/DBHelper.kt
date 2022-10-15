@@ -1,5 +1,6 @@
 package com.example.redederestaurantecomemuito.ui.main.SQlite
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -22,12 +23,9 @@ import com.example.redederestaurantecomemuito.ui.main.SQlite.DBTables.TABLE_REST
 import com.example.redederestaurantecomemuito.ui.main.SQlite.DBTables.TABLE_TEM_PARCERIA
 import com.example.redederestaurantecomemuito.ui.main.SQlite.DBTables.TABLE_ZELADOR
 
-class DBHelper(
-    context: Context,
-    name: String?,
-    factory: SQLiteDatabase.CursorFactory?,
-    version: Int
-) : SQLiteOpenHelper(context, name, factory, version) {
+class DBHelper(context: Context) :
+    SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             TABLE_ANUNCIOS +
@@ -51,10 +49,15 @@ class DBHelper(
         )
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 
+
+    fun insertValueInDb(content: ContentValues, tableName: String) : Long {
+        val db = this.writableDatabase
+        val result = db.insert(tableName, null, content)
+        db.close()
+        return result
+    }
 
 
     companion object {
