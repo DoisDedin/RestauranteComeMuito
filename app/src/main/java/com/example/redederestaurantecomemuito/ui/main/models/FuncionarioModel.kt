@@ -3,6 +3,7 @@ package com.example.redederestaurantecomemuito.ui.main.models
 import java.util.Date
 
 data class FuncionarioModel(
+    var idFuncionario : Int,
     var nome :String,
     var telefone : String,
     var endereco : String,

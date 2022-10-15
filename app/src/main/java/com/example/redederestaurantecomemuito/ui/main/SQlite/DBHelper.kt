@@ -1,6 +1,5 @@
 package com.example.redederestaurantecomemuito.ui.main.SQlite
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -72,19 +71,30 @@ class DBHelper(context: Context) :
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 
-    fun insertFuncionariosInDb(funcionarioModel: FuncionarioModel): Long {
+    fun insertFuncionariosInDb(funcionarioModel: FuncionarioModel) {
         val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put("nome", funcionarioModel.nome)
-        contentValues.put("telefone", funcionarioModel.telefone)
-        contentValues.put("endereco", funcionarioModel.endereco)
-        contentValues.put("salario", funcionarioModel.salario)
-        contentValues.put("id_restaurante", funcionarioModel.idRestaurante)
-        contentValues.put("data_adm", funcionarioModel.dataAdm)
-        contentValues.put("data_saida", funcionarioModel.dataSaida)
-        val result = db.insert(TABLE_FUNCIONARIOS, null, contentValues)
-        db.close()
-        return result
+//        val contentValues = ContentValues()
+//        contentValues.put("nome", funcionarioModel.nome)
+//        contentValues.put("telefone", funcionarioModel.telefone)
+//        contentValues.put("endereco", funcionarioModel.endereco)
+//        contentValues.put("salario", funcionarioModel.salario)
+//        contentValues.put("id_restaurante", funcionarioModel.idRestaurante)
+//        contentValues.put("data_adm", funcionarioModel.dataAdm)
+//        contentValues.put("data_saida", funcionarioModel.dataSaida)
+//        val result = db.insert(TABLE_FUNCIONARIOS, null, contentValues)
+//        db.close()
+
+        val result = db.execSQL(
+            "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) " +
+                    "VALUES (${funcionarioModel.idFuncionario}," +
+                    "'${funcionarioModel.nome}'," +
+                    " '${funcionarioModel.telefone}'," +
+                    " '${funcionarioModel.endereco}'," +
+                    " ${funcionarioModel.salario}," +
+                    " ${funcionarioModel.idRestaurante}," +
+                    " '${funcionarioModel.dataAdm}'," +
+                    " '${funcionarioModel.dataSaida}');"
+        )
     }
 
     private fun createAllTables(db: SQLiteDatabase?) {

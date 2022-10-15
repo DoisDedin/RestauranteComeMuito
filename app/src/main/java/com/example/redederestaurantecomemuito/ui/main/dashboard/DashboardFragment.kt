@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.redederestaurantecomemuito.databinding.FragmentDashboardBinding
 import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
 import com.example.redederestaurantecomemuito.ui.main.models.FuncionarioModel
+import java.util.*
 
 class DashboardFragment : Fragment() {
 
@@ -36,6 +37,7 @@ class DashboardFragment : Fragment() {
             buttonSalvar.setOnClickListener {
                 addFuncionarioInBD(
                     FuncionarioModel(
+                        idFuncionario = Calendar.getInstance().timeInMillis.toInt(),
                         nome = edittextNome.text.toString().orEmpty(),
                         telefone = edittextTelefone.text.toString().orEmpty(),
                         endereco = edittextEndereco.text.toString().orEmpty(),
