@@ -3,6 +3,7 @@ package com.example.redederestaurantecomemuito.ui.main.SQlite
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.redederestaurantecomemuito.ui.main.SQlite.sqlitecode.DBInsert.INSERT_ANUNCIO_1
 import com.example.redederestaurantecomemuito.ui.main.SQlite.sqlitecode.DBInsert.INSERT_ANUNCIO_2
 import com.example.redederestaurantecomemuito.ui.main.SQlite.sqlitecode.DBInsert.INSERT_ANUNCIO_3
@@ -61,12 +62,16 @@ class DBHelper(context: Context) :
         createAllTables(db = db)
         insertAllFuncionarios(db = db)
         insertAllAnuncios(db = db)
+        Log.d("onCreateBD" , "rolou")
         insertAllAreasConstrucao(db = db)
         insertAllAtendentes(db = db)
+        Log.d("onCreateBD" , "rolou")
         insertAllClientes(db = db)
         insertAllMesas(db = db)
         insertAllReservas(db = db)
         insertAllRestaurentes(db = db)
+        Log.d("onCreateBD" , "rolou")
+        Log.d("onCreateBD" , "rolou")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}

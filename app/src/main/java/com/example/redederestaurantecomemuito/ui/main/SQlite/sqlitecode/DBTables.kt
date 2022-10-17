@@ -6,8 +6,8 @@ object DBTables {
             "    id_anuncio      INT     NOT NULL,\n" +
             "    meio_divulgação VARCHAR,\n" +
             "    valor           DOUBLE,\n" +
-            "    data_inicio     VARCHAR,\n" +
-            "    data_final      VARCHAR,\n" +
+            "    data_inicio     DATE,\n" +
+            "    data_final      DATE,\n" +
             "    id_restaurante  INT     NOT NULL,\n" +
             "    CONSTRAINT PK_Anuncios PRIMARY KEY (\n" +
             "        id_anuncio\n" +
@@ -24,7 +24,7 @@ object DBTables {
             "    tamanho        VARCHAR,\n" +
             "    custo          DOUBLE,\n" +
             "    id_area        INT     NOT NULL,\n" +
-            "    data_termino   VARCHAR,\n" +
+            "    data_termino   DATE,\n" +
             "    CONSTRAINT PK_Areas_Construcao PRIMARY KEY (\n" +
             "        id_restaurante,\n" +
             "        id_area\n" +
@@ -45,7 +45,7 @@ object DBTables {
             "        id_funcionario\n" +
             "    )\n" +
             "    REFERENCES Funcionarios (id_funcionario) ON DELETE CASCADE\n" +
-            ");\n"
+            ");"
 
     const val TABLE_BEBIDAS = "CREATE TABLE Bebidas (\n" +
             "    id_empresa_alimenticia INT     NOT NULL,\n" +
@@ -56,7 +56,7 @@ object DBTables {
             "    CONSTRAINT FK_Alimentos_Emp_Parc FOREIGN KEY (\n" +
             "        id_empresa_alimenticia\n" +
             "    )\n" +
-            "    REFERENCES Empresa_alimenticia (id_empresa_alimenticia) ON DELETE CASCADE\n" +
+            "    REFERENCES Empresas_Alimenticias (id_empresa_alimenticia) ON DELETE CASCADE\n" +
             ");\n"
 
     const val TABLE_CHEFE_COZINHA = "CREATE TABLE Chefe_cozinha (\n" +
@@ -93,7 +93,7 @@ object DBTables {
             "        id_funcionario\n" +
             "    )\n" +
             "    REFERENCES Funcionarios (id_funcionario) ON DELETE CASCADE\n" +
-            ");\n"
+            ");"
 
     const val TABLE_EMPRESAS_ALIMENTICIAS = "CREATE TABLE Empresas_Alimenticias (\n" +
             "    id_empresa_alimenticia INT     NOT NULL,\n" +
@@ -102,8 +102,7 @@ object DBTables {
             "    CONSTRAINT PK_empresa_alimenticia PRIMARY KEY (\n" +
             "        id_empresa_alimenticia\n" +
             "    )\n" +
-            ");\n"
-
+            ");"
 
     const val TABLE_FAZ_CONTATO = "CREATE TABLE Faz_Contato (\n" +
             "    id_atendente INT NOT NULL,\n" +
@@ -129,8 +128,8 @@ object DBTables {
             "    endereco       VARCHAR,\n" +
             "    salario        DOUBLE,\n" +
             "    id_restaurante INT     NOT NULL,\n" +
-            "    data_adm       VARCHAR,\n" +
-            "    data_saida     VARCHAR,\n" +
+            "    data_adm       DATE,\n" +
+            "    data_saida     DATE,\n" +
             "    CONSTRAINT PK_Funcionarios PRIMARY KEY (\n" +
             "        id_funcionario\n" +
             "    ),\n" +
@@ -138,7 +137,7 @@ object DBTables {
             "        id_Restaurante\n" +
             "    )\n" +
             "    REFERENCES Restaurante (id_Restaurante) ON DELETE NO ACTION\n" +
-            ");\n"
+            ");"
 
     const val TABLE_GARCOM = "CREATE TABLE Garcom (\n" +
             "    id_funcionario  INT     NOT NULL,\n" +
@@ -171,15 +170,15 @@ object DBTables {
             "        id_recepcionista\n" +
             "    )\n" +
             "    REFERENCES Recepcionista (id_funcionario) ON DELETE NO ACTION\n" +
-            ");\n"
+            ");"
 
     const val TABLE_POSSUI_RESERVA_MESA = "CREATE TABLE Possui_Reserv_Mesa (\n" +
             "    id_reserva       INT     NOT NULL,\n" +
             "    id_restaurante   INT     NOT NULL,\n" +
             "    num_mesa         INT     NOT NULL,\n" +
             "    valor_da_reserva DOUBLE,\n" +
-            "    data_reserva     VARCHAR,\n" +
-            "    hora_reserva     VARCHAR,\n" +
+            "    data_reserva     DATE,\n" +
+            "    hora_reserva     TIME,\n" +
             "    forma_pagamento  VARCHAR,\n" +
             "    CONSTRAINT PK_Possui_Reserv_Mesa PRIMARY KEY (\n" +
             "        id_reserva,\n" +
@@ -225,7 +224,7 @@ object DBTables {
             "        id_cliente\n" +
             "    )\n" +
             "    REFERENCES Cliente (id_cliente) ON DELETE NO ACTION\n" +
-            ");\n"
+            ");"
 
     const val TABLE_RESTAURANTE = "CREATE TABLE Restaurante (\n" +
             "    id_restaurante      INT     NOT NULL,\n" +
@@ -235,23 +234,23 @@ object DBTables {
             "    CONSTRAINT PK_Restaurante PRIMARY KEY (\n" +
             "        id_restaurante\n" +
             "    )\n" +
-            ");\n"
+            ");"
 
     const val TABLE_TEM_PARCERIA = "CREATE TABLE Tem_Parceria (\n" +
-            "    id_restaurante          INT NOT NULL,\n" +
-            "    id_empresa_alimenticias INT NOT NULL,\n" +
+            "    id_restaurante         INT NOT NULL,\n" +
+            "    id_empresa_alimenticia INT NOT NULL,\n" +
             "    CONSTRAINT PK_Tem_Parceria PRIMARY KEY (\n" +
             "        id_restaurante,\n" +
-            "        id_empresa_alimenticias\n" +
+            "        id_empresa_alimenticia\n" +
             "    ),\n" +
             "    CONSTRAINT FK_Parc_Restaurante FOREIGN KEY (\n" +
             "        id_restaurante\n" +
             "    )\n" +
             "    REFERENCES Restaurante (id_restaurante) ON DELETE NO ACTION,\n" +
             "    CONSTRAINT FK_Parc_EmpAlimen FOREIGN KEY (\n" +
-            "        id_empresa_alimenticias\n" +
+            "        id_empresa_alimenticia\n" +
             "    )\n" +
-            "    REFERENCES Empresas_Alimenticias (id_empresa_alimenticias) ON DELETE NO ACTION\n" +
+            "    REFERENCES Empresas_Alimenticias (id_empresa_alimenticia) ON DELETE NO ACTION\n" +
             ");\n"
 
     const val TABLE_ZELADOR = "CREATE TABLE Zelador (\n" +
@@ -275,7 +274,7 @@ object DBTables {
             "    CONSTRAINT FK_Alimentos_Emp_Parc FOREIGN KEY (\n" +
             "        id_empresa_alimenticia\n" +
             "    )\n" +
-            "    REFERENCES Empresa_alimenticia (id_empresa_alimenticia) ON DELETE CASCADE\n" +
+            "    REFERENCES Empresas_Alimenticias (id_empresa_alimenticia) ON DELETE CASCADE\n" +
             ");\n"
 
 }

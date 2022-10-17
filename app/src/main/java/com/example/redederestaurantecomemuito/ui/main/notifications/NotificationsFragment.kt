@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.redederestaurantecomemuito.databinding.FragmentNotificationsBinding
+import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
 
 class NotificationsFragment : Fragment() {
 
