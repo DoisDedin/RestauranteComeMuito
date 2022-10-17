@@ -27,7 +27,7 @@ class FuncionariosAdapter : RecyclerView.Adapter<FuncionariosAdapter.Funcionario
     fun setData(list: List<FuncionarioModel>) {
         funcionariosList.clear()
         funcionariosList.addAll(list)
-        notifyItemRangeChanged(0, list.size)
+        notifyDataSetChanged()
     }
 
     fun setOnClick(executeOnClick: (funcionarioModel: FuncionarioModel) -> Unit) {
@@ -55,8 +55,9 @@ class FuncionariosAdapter : RecyclerView.Adapter<FuncionariosAdapter.Funcionario
 
         private fun setClickLayout(funcionarioModel: FuncionarioModel) {
             itemBinding.apply {
-                contraintlayoutGeral.setOnClickListener {
+                contraintlayoutGeral.setOnLongClickListener {
                     executeOnClick.invoke(funcionarioModel)
+                    return@setOnLongClickListener false
                 }
             }
         }

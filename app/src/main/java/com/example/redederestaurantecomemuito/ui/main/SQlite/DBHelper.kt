@@ -176,9 +176,9 @@ class DBHelper(context: Context) :
 
 
     fun getFuncionarios(
-        code: String?,
-        name: String?,
-        salario: String?
+        code: String? = "",
+        name: String? = "",
+        salario: String? = ""
     ): MutableList<FuncionarioModel> {
         val db = this.readableDatabase
         val listFuncionarios: MutableList<FuncionarioModel> = arrayListOf()
@@ -203,6 +203,12 @@ class DBHelper(context: Context) :
         }
         db.close()
         return listFuncionarios
+    }
+
+    fun deleteFuncionario(id: String) {
+        val db = this.writableDatabase
+        db.execSQL("DELETE  FROM Funcionarios WHERE id_funcionario = $id")
+        db.close()
     }
 
     companion object {

@@ -26,28 +26,26 @@ class NotificationsFragment : Fragment() {
     ): View {
         val notificationsViewModel =
             ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         setUpAdapter()
-
         getAndSetFuncionariosInLayout()
         return root
     }
 
-
     private fun setUpAdapter() {
         adapter = FuncionariosAdapter()
         binding.recyclerViewDaysEvents.adapter = adapter
-        adapter.setOnClick {
-            //criar aqui o dialog para selecionar se vai deletar o funcionario
+        adapter.setOnClick { funcionarioModel ->
+            val db = DBHelper(requireContext())
+            db.deleteFuncionario(funcionarioModel.idFuncionario.toString())
+            adapter.setData(db.getFuncionarios())
         }
     }
 
     private fun getAndSetFuncionariosInLayout() {
         val db = DBHelper(requireContext())
-        adapter.setData(db.getFuncionarios(null, null, null))
+        adapter.setData(db.getFuncionarios())
     }
 
     override fun onDestroyView() {
