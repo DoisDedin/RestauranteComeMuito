@@ -211,6 +211,12 @@ class DBHelper(context: Context) :
         db.close()
     }
 
+    fun gerenteFicouMaluco(){
+        val db = this.writableDatabase
+        db.execSQL("UPDATE Funcionarios SET salario = salario * 1.2 WHERE salario <= 2500")
+        db.close()
+    }
+
     companion object {
         const val DB_NAME = "ComeMuito"
         const val DB_VERSION = 1

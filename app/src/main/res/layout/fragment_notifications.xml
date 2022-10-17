@@ -8,14 +8,26 @@
 
     <Button
         android:id="@+id/button_filtrar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorOffWhite"
         android:backgroundTint="@color/colorOffWhite"
         android:text="FILTRAR"
         android:textColor="@color/colorBlack"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_gerente_ficou_louco"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_gerente_ficou_louco"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorOffWhite"
+        android:backgroundTint="@color/colorOffWhite"
+        android:text="++Salario"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_filtrar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText

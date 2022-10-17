@@ -28,6 +28,11 @@ class NotificationsFragment : Fragment() {
             ViewModelProvider(this).get(NotificationsViewModel::class.java)
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+
+
+        listeners()
         setUpAdapter()
         getAndSetFuncionariosInLayout()
         return root
@@ -43,9 +48,20 @@ class NotificationsFragment : Fragment() {
         }
     }
 
+    private fun listeners() {
+        binding.apply {
+            buttonFiltrar.setOnClickListener {
+
+            }
+            buttonGerenteFicouLouco.setOnClickListener {
+                DBHelper(requireContext()).gerenteFicouMaluco()
+                adapter.setData(DBHelper(requireContext()).getFuncionarios())
+            }
+        }
+    }
+
     private fun getAndSetFuncionariosInLayout() {
-        val db = DBHelper(requireContext())
-        adapter.setData(db.getFuncionarios())
+        adapter.setData(DBHelper(requireContext()).getFuncionarios())
     }
 
     override fun onDestroyView() {
