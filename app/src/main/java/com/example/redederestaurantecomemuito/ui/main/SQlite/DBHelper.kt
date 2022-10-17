@@ -62,16 +62,16 @@ class DBHelper(context: Context) :
         createAllTables(db = db)
         insertAllFuncionarios(db = db)
         insertAllAnuncios(db = db)
-        Log.d("onCreateBD" , "rolou")
+        Log.d("onCreateBD", "rolou")
         insertAllAreasConstrucao(db = db)
         insertAllAtendentes(db = db)
-        Log.d("onCreateBD" , "rolou")
+        Log.d("onCreateBD", "rolou")
         insertAllClientes(db = db)
         insertAllMesas(db = db)
         insertAllReservas(db = db)
         insertAllRestaurentes(db = db)
-        Log.d("onCreateBD" , "rolou")
-        Log.d("onCreateBD" , "rolou")
+        Log.d("onCreateBD", "rolou")
+        Log.d("onCreateBD", "rolou")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
@@ -172,6 +172,37 @@ class DBHelper(context: Context) :
         db?.execSQL(INSERT_RESTAURANTE_1)
         db?.execSQL(INSERT_RESTAURANTE_2)
         db?.execSQL(INSERT_RESTAURANTE_3)
+    }
+
+
+    fun getFuncionarios(
+        code: String?,
+        name: String?,
+        salario: String?
+    ): MutableList<FuncionarioModel> {
+        val db = this.readableDatabase
+        val listFuncionarios: MutableList<FuncionarioModel> = arrayListOf()
+        if (code.isNullOrEmpty() && name.isNullOrEmpty() && salario.isNullOrEmpty()) {
+            val infoRaw = db?.rawQuery("SELECT * FROM Funcionarios", null)
+            if (infoRaw?.moveToFirst() == true) {
+                do {
+                    listFuncionarios.add(
+                        FuncionarioModel(
+                            idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
+                            nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
+                            telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
+                            endereco = infoRaw.getString(infoRaw.getColumnIndexOrThrow("endereco")),
+                            salario = infoRaw.getDouble(infoRaw.getColumnIndexOrThrow("salario")),
+                            idRestaurante = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_restaurante")),
+                            dataAdm = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_adm")),
+                            dataSaida = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_saida")),
+                        )
+                    )
+                } while (infoRaw.moveToNext())
+            }
+        }
+        db.close()
+        return listFuncionarios
     }
 
     companion object {
