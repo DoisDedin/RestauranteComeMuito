@@ -36,23 +36,7 @@ class DashboardFragment : Fragment() {
             buttonSalvar.setOnClickListener {
                 addFuncionarioInBD(
                     FuncionarioModel(
-                        idFuncionario = Calendar.getInstance().timeInMillis.toInt(),
-                        nome = edittextNome.text.toString().orEmpty(),
-                        telefone = edittextTelefone.text.toString().orEmpty(),
-                        endereco = edittextEndereco.text.toString().orEmpty(),
-                        salario = edittextSalario.text.toString().toDouble() ?: 0.0,
-                        idRestaurante = edittextIdRestaurante.text.toString().toInt() ?: 1,
-                        dataAdm = edittextDataAdm.text.toString(),
-                        dataSaida = edittextDataSaida.text.toString()
-                    )
-                )
-            }
-
-            buttonEditar.setOnClickListener {
-                editarFuncionarioInBD(
-                    FuncionarioModel(
-                        idFuncionario = edittextIdFuncionario.text.toString().toInt()
-                            ?: Calendar.getInstance().timeInMillis.toInt(),
+                        idFuncionario = edittextIdFuncionario.text.toString().toInt(),
                         nome = edittextNome.text.toString().orEmpty(),
                         telefone = edittextTelefone.text.toString().orEmpty(),
                         endereco = edittextEndereco.text.toString().orEmpty(),
@@ -69,10 +53,6 @@ class DashboardFragment : Fragment() {
 
     fun addFuncionarioInBD(funcionarioModel: FuncionarioModel) {
         dbSqlite?.insertFuncionariosInDb(funcionarioModel)
-    }
-
-    fun editarFuncionarioInBD(funcionarioModel: FuncionarioModel) {
-        dbSqlite?.editFuncionarioInDb(funcionarioModel = funcionarioModel)
     }
 
     override fun onDestroyView() {

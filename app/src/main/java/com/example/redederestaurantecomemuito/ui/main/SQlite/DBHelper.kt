@@ -92,12 +92,6 @@ class DBHelper(context: Context) :
         db.close()
     }
 
-    fun editFuncionarioInDb(funcionarioModel: FuncionarioModel) {
-        val db = this.writableDatabase
-        val result = db.execSQL("")
-        db.close()
-    }
-
     private fun createAllTables(db: SQLiteDatabase?) {
         db?.execSQL(TABLE_ANUNCIOS)
         db?.execSQL(TABLE_AREAS_CONSTRUCAO)
@@ -178,11 +172,87 @@ class DBHelper(context: Context) :
     fun getFuncionarios(
         code: String? = "",
         name: String? = "",
-        salario: String? = ""
+        salarioo: String? = ""
     ): MutableList<FuncionarioModel> {
         val db = this.readableDatabase
         val listFuncionarios: MutableList<FuncionarioModel> = arrayListOf()
-        if (code.isNullOrEmpty() && name.isNullOrEmpty() && salario.isNullOrEmpty()) {
+        if (code.isNullOrEmpty() and name.isNullOrEmpty() and salarioo.isNullOrEmpty()) {
+            val infoRaw = db?.rawQuery("SELECT * FROM Funcionarios", null)
+            if (infoRaw?.moveToFirst() == true) {
+                do {
+                    listFuncionarios.add(
+                        FuncionarioModel(
+                            idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
+                            nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
+                            telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
+                            endereco = infoRaw.getString(infoRaw.getColumnIndexOrThrow("endereco")),
+                            salario = infoRaw.getDouble(infoRaw.getColumnIndexOrThrow("salario")),
+                            idRestaurante = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_restaurante")),
+                            dataAdm = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_adm")),
+                            dataSaida = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_saida")),
+                        )
+                    )
+                } while (infoRaw.moveToNext())
+            }
+        } else if (!code.isNullOrEmpty()) {
+            val infoRaw =
+                db?.rawQuery("SELECT * FROM Funcionarios WHERE id_funcionario = $code", null)
+            if (infoRaw?.moveToFirst() == true) {
+                do {
+                    listFuncionarios.add(
+                        FuncionarioModel(
+                            idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
+                            nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
+                            telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
+                            endereco = infoRaw.getString(infoRaw.getColumnIndexOrThrow("endereco")),
+                            salario = infoRaw.getDouble(infoRaw.getColumnIndexOrThrow("salario")),
+                            idRestaurante = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_restaurante")),
+                            dataAdm = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_adm")),
+                            dataSaida = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_saida")),
+                        )
+                    )
+                } while (infoRaw.moveToNext())
+            }
+        } else if (!name.isNullOrEmpty()) {
+            val infoRaw =
+                db?.rawQuery("SELECT * FROM Funcionarios WHERE nome LIKE '$name%'", null)
+            if (infoRaw?.moveToFirst() == true) {
+                do {
+                    listFuncionarios.add(
+                        FuncionarioModel(
+                            idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
+                            nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
+                            telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
+                            endereco = infoRaw.getString(infoRaw.getColumnIndexOrThrow("endereco")),
+                            salario = infoRaw.getDouble(infoRaw.getColumnIndexOrThrow("salario")),
+                            idRestaurante = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_restaurante")),
+                            dataAdm = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_adm")),
+                            dataSaida = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_saida")),
+                        )
+                    )
+                } while (infoRaw.moveToNext())
+            }
+        } else if (!salarioo.isNullOrEmpty()) {
+            val sal = salarioo.toDouble()
+            val infoRaw =
+                db?.rawQuery("SELECT * FROM Funcionarios WHERE salario <= $sal", null)
+            if (infoRaw?.moveToFirst() == true) {
+                do {
+                    listFuncionarios.add(
+                        FuncionarioModel(
+                            idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
+                            nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
+                            telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
+                            endereco = infoRaw.getString(infoRaw.getColumnIndexOrThrow("endereco")),
+                            salario = infoRaw.getDouble(infoRaw.getColumnIndexOrThrow("salario")),
+                            idRestaurante = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_restaurante")),
+                            dataAdm = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_adm")),
+                            dataSaida = infoRaw.getString(infoRaw.getColumnIndexOrThrow("data_saida")),
+                        )
+                    )
+                } while (infoRaw.moveToNext())
+            }
+        } else {
             val infoRaw = db?.rawQuery("SELECT * FROM Funcionarios", null)
             if (infoRaw?.moveToFirst() == true) {
                 do {
@@ -211,7 +281,7 @@ class DBHelper(context: Context) :
         db.close()
     }
 
-    fun gerenteFicouMaluco(){
+    fun gerenteFicouMaluco() {
         val db = this.writableDatabase
         db.execSQL("UPDATE Funcionarios SET salario = salario * 1.2 WHERE salario <= 2500")
         db.close()

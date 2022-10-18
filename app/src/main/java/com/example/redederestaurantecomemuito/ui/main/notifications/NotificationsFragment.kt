@@ -29,9 +29,6 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
-
         listeners()
         setUpAdapter()
         getAndSetFuncionariosInLayout()
@@ -51,7 +48,13 @@ class NotificationsFragment : Fragment() {
     private fun listeners() {
         binding.apply {
             buttonFiltrar.setOnClickListener {
-
+                adapter.setData(
+                    DBHelper(requireContext()).getFuncionarios(
+                        editTextCode.text.toString(),
+                        edittextName.text.toString(),
+                        editTextSalario.text.toString()
+                    )
+                )
             }
             buttonGerenteFicouLouco.setOnClickListener {
                 DBHelper(requireContext()).gerenteFicouMaluco()
