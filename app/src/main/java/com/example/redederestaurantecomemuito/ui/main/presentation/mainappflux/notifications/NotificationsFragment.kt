@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.notifications
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.redederestaurantecomemuito.databinding.FragmentNotificationsBinding
-import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.data.SQlite.DBHelper
 
 class NotificationsFragment : Fragment() {
 

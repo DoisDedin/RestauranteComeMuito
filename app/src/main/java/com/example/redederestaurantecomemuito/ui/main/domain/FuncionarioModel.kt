@@ -1,6 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.models
-
-import java.util.Date
+package com.example.redederestaurantecomemuito.ui.main.domain
 
 data class FuncionarioModel(
     var idFuncionario : Int,

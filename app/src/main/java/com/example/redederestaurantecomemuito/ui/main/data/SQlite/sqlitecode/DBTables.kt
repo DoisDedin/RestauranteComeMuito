@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.SQlite.sqlitecode
+package com.example.redederestaurantecomemuito.ui.main.data.SQlite.sqlitecode
 
 object DBTables {
 

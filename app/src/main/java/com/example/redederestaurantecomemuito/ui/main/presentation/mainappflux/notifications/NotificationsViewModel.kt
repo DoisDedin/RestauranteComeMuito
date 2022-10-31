@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.notifications
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

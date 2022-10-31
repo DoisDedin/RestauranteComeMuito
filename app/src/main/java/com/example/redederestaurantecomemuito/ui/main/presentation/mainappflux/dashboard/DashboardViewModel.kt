@@ -1,11 +1,11 @@
-package com.example.redederestaurantecomemuito.ui.main.dashboard
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.dashboard
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
-import com.example.redederestaurantecomemuito.ui.main.models.FuncionarioModel
+import com.example.redederestaurantecomemuito.ui.main.data.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
 
 class DashboardViewModel : ViewModel() {
     private var dbSqlite: DBHelper? = null

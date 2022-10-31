@@ -1,11 +1,11 @@
-package com.example.redederestaurantecomemuito.ui.main.notifications
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redederestaurantecomemuito.databinding.ItemFuncionarioBinding
-import com.example.redederestaurantecomemuito.ui.main.models.FuncionarioModel
+import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
 
 class FuncionariosAdapter : RecyclerView.Adapter<FuncionariosAdapter.FuncionariosHolder>() {
 

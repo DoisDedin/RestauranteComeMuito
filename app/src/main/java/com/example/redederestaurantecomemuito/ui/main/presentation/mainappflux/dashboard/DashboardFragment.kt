@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.dashboard
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.redederestaurantecomemuito.databinding.FragmentDashboardBinding
-import com.example.redederestaurantecomemuito.ui.main.SQlite.DBHelper
-import com.example.redederestaurantecomemuito.ui.main.models.FuncionarioModel
-import java.util.*
+import com.example.redederestaurantecomemuito.ui.main.data.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
 
 class DashboardFragment : Fragment() {
 

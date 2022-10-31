@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.home
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
