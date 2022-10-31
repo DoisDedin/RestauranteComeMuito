@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.data.SQlite.sqlitecode
+package com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.sqlitecode
 
 object DBInsert {
 

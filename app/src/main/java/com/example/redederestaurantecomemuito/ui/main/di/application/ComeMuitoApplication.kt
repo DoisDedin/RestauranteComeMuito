@@ -5,8 +5,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import com.example.redederestaurantecomemuito.ui.main.data.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class ComeMuitoApplication : Application() {
 
     private var dbSqlite: DBHelper? = null

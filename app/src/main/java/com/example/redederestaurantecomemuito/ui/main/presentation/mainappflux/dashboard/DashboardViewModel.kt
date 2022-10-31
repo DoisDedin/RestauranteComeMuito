@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.redederestaurantecomemuito.ui.main.data.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
 import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
 
 class DashboardViewModel : ViewModel() {

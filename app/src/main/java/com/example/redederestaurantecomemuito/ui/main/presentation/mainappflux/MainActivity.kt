@@ -17,9 +17,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.redederestaurantecomemuito.R
 import com.example.redederestaurantecomemuito.databinding.ActivityMainBinding
-import com.example.redederestaurantecomemuito.ui.main.data.SQlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
