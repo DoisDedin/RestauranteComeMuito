@@ -1,4 +1,4 @@
-package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.activity
 
 import android.Manifest
 import android.app.NotificationManager

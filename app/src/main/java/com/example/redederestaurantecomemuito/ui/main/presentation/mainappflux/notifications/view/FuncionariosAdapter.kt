@@ -1,16 +1,16 @@
-package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications
+package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.view
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redederestaurantecomemuito.databinding.ItemFuncionarioBinding
-import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
+import com.example.redederestaurantecomemuito.ui.main.domain.EmployeeDomain
 
 class FuncionariosAdapter : RecyclerView.Adapter<FuncionariosAdapter.FuncionariosHolder>() {
 
-    private var funcionariosList: MutableList<FuncionarioModel> = arrayListOf()
-    private lateinit var executeOnClick: (funcionarioModel: FuncionarioModel) -> Unit
+    private var funcionariosList: MutableList<EmployeeDomain> = arrayListOf()
+    private lateinit var executeOnClick: (funcionarioModel: EmployeeDomain) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FuncionariosHolder {
         val itemBinding =
@@ -24,28 +24,28 @@ class FuncionariosAdapter : RecyclerView.Adapter<FuncionariosAdapter.Funcionario
 
     override fun getItemCount(): Int = funcionariosList.size
 
-    fun setData(list: List<FuncionarioModel>) {
+    fun setData(list: List<EmployeeDomain>) {
         funcionariosList.clear()
         funcionariosList.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun setOnClick(executeOnClick: (funcionarioModel: FuncionarioModel) -> Unit) {
+    fun setOnClick(executeOnClick: (funcionarioModel: EmployeeDomain) -> Unit) {
         this.executeOnClick = executeOnClick
     }
 
     class FuncionariosHolder(
         private val itemBinding: ItemFuncionarioBinding,
-        private val executeOnClick: (funcionarioModel: FuncionarioModel) -> Unit,
+        private val executeOnClick: (funcionarioModel: EmployeeDomain) -> Unit,
         private val context: Context
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(funcionarioModel: FuncionarioModel) {
+        fun bind(funcionarioModel: EmployeeDomain) {
             setInfolayout(funcionarioModel = funcionarioModel)
             setClickLayout(funcionarioModel = funcionarioModel)
         }
 
-        private fun setInfolayout(funcionarioModel: FuncionarioModel) {
+        private fun setInfolayout(funcionarioModel: EmployeeDomain) {
             itemBinding.apply {
                 textviewName.text = funcionarioModel.nome
                 textviewCode.text = funcionarioModel.idFuncionario.toString()
@@ -53,7 +53,7 @@ class FuncionariosAdapter : RecyclerView.Adapter<FuncionariosAdapter.Funcionario
             }
         }
 
-        private fun setClickLayout(funcionarioModel: FuncionarioModel) {
+        private fun setClickLayout(funcionarioModel: EmployeeDomain) {
             itemBinding.apply {
                 contraintlayoutGeral.setOnLongClickListener {
                     executeOnClick.invoke(funcionarioModel)

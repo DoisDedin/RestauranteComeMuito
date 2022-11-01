@@ -15,7 +15,7 @@
         android:theme="@style/Theme.RedeDeRestauranteComeMuito"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.presentation.mainappflux.MainActivity"
+            android:name=".ui.main.presentation.mainappflux.notifications.activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

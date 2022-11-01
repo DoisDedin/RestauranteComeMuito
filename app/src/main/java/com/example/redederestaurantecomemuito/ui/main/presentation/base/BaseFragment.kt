@@ -9,11 +9,11 @@ import androidx.viewbinding.ViewBinding
 import com.example.redederestaurantecomemuito.ui.main.common.getViewBinding
 
 
-class BaseFragment<T : ViewBinding> : Fragment() {
+open class BaseFragment<T : ViewBinding> : Fragment() {
 
     private lateinit var _binding: T
 
-    private val binding
+    val binding
         get() = _binding
 
 

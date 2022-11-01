@@ -53,7 +53,7 @@ import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.sqliteco
 import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.sqlitecode.DBTables.TABLE_RESTAURANTE
 import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.sqlitecode.DBTables.TABLE_TEM_PARCERIA
 import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.sqlitecode.DBTables.TABLE_ZELADOR
-import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
+import com.example.redederestaurantecomemuito.ui.main.domain.EmployeeDomain
 
 class DBHelper(context: Context) :
     SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
@@ -76,7 +76,7 @@ class DBHelper(context: Context) :
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 
-    fun insertFuncionariosInDb(funcionarioModel: FuncionarioModel) {
+    fun insertFuncionariosInDb(funcionarioModel: EmployeeDomain) {
         val db = this.writableDatabase
         val result = db.execSQL(
             "INSERT INTO Funcionarios (id_funcionario, nome, telefone, endereco, salario, id_restaurante, data_adm, data_saida) " +
@@ -172,16 +172,16 @@ class DBHelper(context: Context) :
     fun getFuncionarios(
         code: String? = "",
         name: String? = "",
-        salarioo: String? = ""
-    ): MutableList<FuncionarioModel> {
+        salario: String? = ""
+    ): MutableList<EmployeeDomain> {
         val db = this.readableDatabase
-        val listFuncionarios: MutableList<FuncionarioModel> = arrayListOf()
-        if (code.isNullOrEmpty() and name.isNullOrEmpty() and salarioo.isNullOrEmpty()) {
+        val listFuncionarios: MutableList<EmployeeDomain> = arrayListOf()
+        if (code.isNullOrEmpty() and name.isNullOrEmpty() and salario.isNullOrEmpty()) {
             val infoRaw = db?.rawQuery("SELECT * FROM Funcionarios", null)
             if (infoRaw?.moveToFirst() == true) {
                 do {
                     listFuncionarios.add(
-                        FuncionarioModel(
+                        EmployeeDomain(
                             idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
                             nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
                             telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
@@ -200,7 +200,7 @@ class DBHelper(context: Context) :
             if (infoRaw?.moveToFirst() == true) {
                 do {
                     listFuncionarios.add(
-                        FuncionarioModel(
+                        EmployeeDomain(
                             idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
                             nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
                             telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
@@ -219,7 +219,7 @@ class DBHelper(context: Context) :
             if (infoRaw?.moveToFirst() == true) {
                 do {
                     listFuncionarios.add(
-                        FuncionarioModel(
+                        EmployeeDomain(
                             idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
                             nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
                             telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
@@ -232,14 +232,14 @@ class DBHelper(context: Context) :
                     )
                 } while (infoRaw.moveToNext())
             }
-        } else if (!salarioo.isNullOrEmpty()) {
-            val sal = salarioo.toDouble()
+        } else if (!salario.isNullOrEmpty()) {
+            val sal = salario.toDouble()
             val infoRaw =
                 db?.rawQuery("SELECT * FROM Funcionarios WHERE salario <= $sal", null)
             if (infoRaw?.moveToFirst() == true) {
                 do {
                     listFuncionarios.add(
-                        FuncionarioModel(
+                        EmployeeDomain(
                             idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
                             nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
                             telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),
@@ -257,7 +257,7 @@ class DBHelper(context: Context) :
             if (infoRaw?.moveToFirst() == true) {
                 do {
                     listFuncionarios.add(
-                        FuncionarioModel(
+                        EmployeeDomain(
                             idFuncionario = infoRaw.getInt(infoRaw.getColumnIndexOrThrow("id_funcionario")),
                             nome = infoRaw.getString(infoRaw.getColumnIndexOrThrow("nome")),
                             telefone = infoRaw.getString(infoRaw.getColumnIndexOrThrow("telefone")),

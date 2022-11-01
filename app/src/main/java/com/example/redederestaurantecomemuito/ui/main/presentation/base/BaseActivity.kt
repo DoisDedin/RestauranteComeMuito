@@ -14,7 +14,6 @@ class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         instantiateViewBinding(layoutInflater)
         setContentView(binding.root)
-
     }
 
     private fun instantiateViewBinding(layoutInflater: LayoutInflater) {

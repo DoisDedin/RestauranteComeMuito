@@ -2,6 +2,7 @@ package com.example.redederestaurantecomemuito.ui.main.di.modules
 
 import android.content.Context
 import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
+import com.example.redederestaurantecomemuito.ui.main.data.repository.RestaurantRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

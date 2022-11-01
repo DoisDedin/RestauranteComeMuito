@@ -1,6 +1,6 @@
 package com.example.redederestaurantecomemuito.ui.main.domain
 
-data class FuncionarioModel(
+data class EmployeeDomain(
     var idFuncionario : Int,
     var nome :String,
     var telefone : String,

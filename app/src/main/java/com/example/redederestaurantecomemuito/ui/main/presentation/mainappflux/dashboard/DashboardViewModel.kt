@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
-import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
+import com.example.redederestaurantecomemuito.ui.main.domain.EmployeeDomain
 
 class DashboardViewModel : ViewModel() {
     private var dbSqlite: DBHelper? = null
@@ -14,7 +14,7 @@ class DashboardViewModel : ViewModel() {
     }
 
 
-    fun addFuncionarioInBD(funcionarioModel: FuncionarioModel, context: Context) {
+    fun addFuncionarioInBD(funcionarioModel: EmployeeDomain, context: Context) {
         dbSqlite = DBHelper(context)
         dbSqlite?.writableDatabase
     }

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.redederestaurantecomemuito.databinding.FragmentDashboardBinding
 import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
-import com.example.redederestaurantecomemuito.ui.main.domain.FuncionarioModel
+import com.example.redederestaurantecomemuito.ui.main.domain.EmployeeDomain
 
 class DashboardFragment : Fragment() {
 
@@ -34,7 +34,7 @@ class DashboardFragment : Fragment() {
         binding.apply {
             buttonSalvar.setOnClickListener {
                 addFuncionarioInBD(
-                    FuncionarioModel(
+                    EmployeeDomain(
                         idFuncionario = edittextIdFuncionario.text.toString().toInt(),
                         nome = edittextNome.text.toString().orEmpty(),
                         telefone = edittextTelefone.text.toString().orEmpty(),
@@ -50,7 +50,7 @@ class DashboardFragment : Fragment() {
     }
 
 
-    fun addFuncionarioInBD(funcionarioModel: FuncionarioModel) {
+    fun addFuncionarioInBD(funcionarioModel: EmployeeDomain) {
         dbSqlite?.insertFuncionariosInDb(funcionarioModel)
     }
 
