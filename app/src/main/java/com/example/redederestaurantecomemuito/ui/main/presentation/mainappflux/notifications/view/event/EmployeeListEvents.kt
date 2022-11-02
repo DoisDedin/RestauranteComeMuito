@@ -2,10 +2,12 @@ package com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.
 
 sealed class EmployeeListEvents {
     data class QueryEmployee(
-        val code: String,
-        val name: String,
-        val salario: String
+        val code: String = "",
+        val name: String = "",
+        val salario: String = ""
     ) : EmployeeListEvents()
 
     data class LongClickDeleteEmployeePokemon(val employeeId: String) : EmployeeListEvents()
+
+    object ClickManagerWentCrazy : EmployeeListEvents()
 }

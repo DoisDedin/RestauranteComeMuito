@@ -11,4 +11,8 @@ interface RestaurantRepository {
         name: String? = "",
         salario: String? = ""
     ): MutableList<EmployeeDomain>
+
+    suspend fun managerWentCrazy()
+
+    suspend fun deleteEmployee(code: String)
 }

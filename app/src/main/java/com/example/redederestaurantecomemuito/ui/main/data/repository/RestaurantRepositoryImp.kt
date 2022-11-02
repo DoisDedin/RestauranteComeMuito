@@ -17,4 +17,12 @@ class RestaurantRepositoryImp @Inject constructor(val dbHelper: DBHelper) : Rest
     ): MutableList<EmployeeDomain> {
         return dbHelper.getFuncionarios(code = code, name = name, salario = salario)
     }
+
+    override suspend fun managerWentCrazy() {
+        dbHelper.gerenteFicouMaluco()
+    }
+
+    override suspend fun deleteEmployee(code: String) {
+        dbHelper.deleteFuncionario(id = code)
+    }
 }

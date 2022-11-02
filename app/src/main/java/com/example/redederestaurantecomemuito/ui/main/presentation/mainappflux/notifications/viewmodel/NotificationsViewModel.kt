@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.redederestaurantecomemuito.ui.main.domain.usecase.GetEmployeesUseCase
+import com.example.redederestaurantecomemuito.ui.main.domain.usecase.ManagerWentCrazyUseCase
 import com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.view.action.EmployeeListUiAction
 import com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.view.event.EmployeeListEvents
 import com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.view.state.EmployeeListUiState
@@ -16,7 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationsViewModel @Inject constructor(private val getEmployeesUseCase: GetEmployeesUseCase) :
+class NotificationsViewModel @Inject constructor(
+    private val getEmployeesUseCase: GetEmployeesUseCase,
+    private val managerWhenCrazyUseCase: ManagerWentCrazyUseCase
+) :
     ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
@@ -38,6 +42,9 @@ class NotificationsViewModel @Inject constructor(private val getEmployeesUseCase
             }
             is EmployeeListEvents.LongClickDeleteEmployeePokemon -> {
                 deleteEmployee(employeeId = events.employeeId)
+            }
+            is EmployeeListEvents.ClickManagerWentCrazy -> {
+                managerWentCrazy()
             }
         }
     }
@@ -62,6 +69,13 @@ class NotificationsViewModel @Inject constructor(private val getEmployeesUseCase
             }.collect { listEmployees ->
                 _state.postValue(_state.value?.copy(employee = listEmployees))
             }
+        }
+    }
+
+    private fun managerWentCrazy() {
+        viewModelScope.launch(Dispatchers.IO) {
+            setQueryingState(querying = true)
+            managerWhenCrazyUseCase.managerWentCrazy()
         }
     }
 

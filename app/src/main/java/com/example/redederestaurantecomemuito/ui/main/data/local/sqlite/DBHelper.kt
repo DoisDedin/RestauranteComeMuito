@@ -168,7 +168,6 @@ class DBHelper(context: Context) :
         db?.execSQL(INSERT_RESTAURANTE_3)
     }
 
-
     fun getFuncionarios(
         code: String? = "",
         name: String? = "",

@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.redederestaurantecomemuito.databinding.FragmentNotificationsBinding
 import com.example.redederestaurantecomemuito.ui.main.common.observe
-import com.example.redederestaurantecomemuito.ui.main.data.local.sqlite.DBHelper
 import com.example.redederestaurantecomemuito.ui.main.presentation.base.BaseFragment
+import com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.view.action.EmployeeListUiAction
 import com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.view.event.EmployeeListEvents
 import com.example.redederestaurantecomemuito.ui.main.presentation.mainappflux.notifications.viewmodel.NotificationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,9 +30,12 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         adapter = FuncionariosAdapter()
         binding.recyclerViewDaysEvents.adapter = adapter
         adapter.setOnClick { funcionarioModel ->
-            val db = DBHelper(requireContext())
-            db.deleteFuncionario(funcionarioModel.idFuncionario.toString())
-            adapter.setData(db.getFuncionarios())
+            viewModel.toggleEvent(
+                EmployeeListEvents.LongClickDeleteEmployeePokemon(
+                    employeeId = funcionarioModel.idFuncionario.toString()
+                )
+            )
+            viewModel.toggleEvent(EmployeeListEvents.QueryEmployee())
         }
     }
 
@@ -46,17 +49,10 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
                         editTextSalario.text.toString()
                     )
                 )
-//                adapter.setData(
-//                    DBHelper(requireContext()).getFuncionarios(
-//                        editTextCode.text.toString(),
-//                        edittextName.text.toString(),
-//                        editTextSalario.text.toString()
-//                    )
-//                )
             }
             buttonGerenteFicouLouco.setOnClickListener {
-                DBHelper(requireContext()).gerenteFicouMaluco()
-                adapter.setData(DBHelper(requireContext()).getFuncionarios())
+                viewModel.toggleEvent(EmployeeListEvents.ClickManagerWentCrazy)
+                viewModel.toggleEvent(EmployeeListEvents.QueryEmployee())
             }
         }
     }
@@ -67,6 +63,20 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
                 adapter.setData(state.employee)
                 // fazer alguma coisa caso não for vazio state.error.isEmpty()
                 // mostar um load caso essa variavel seja verdaeira state.isQuerying
+            }
+            observe(action) { action ->
+                when (action) {
+                    is EmployeeListUiAction.ShowProgress -> {
+                        //infelizmente não temos progress ainda
+                    }
+                    is EmployeeListUiAction.ResetAdapter -> {
+                        //pode ser feito o delete do adapter e deixar preparado
+                        // para receber os novos dados
+                    }
+                    is EmployeeListUiAction.ShowRecyclerViewProgress -> {
+                        //not implementation yet a progress in this RecyclerView
+                    }
+                }
             }
         }
     }
